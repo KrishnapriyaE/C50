@@ -274,9 +274,9 @@ double r=1/(1-q);
 		{
 		    continue;
 		}
-
+double s=(1-UnknownRate) / KnownCases);
 		ThisGain = PrevGain -
-			   (pow((1-UnknownRate) / KnownCases),q) *
+			   (pow(s,q) *
 			     (GEnv.MergeEntr[V1][V2] -
 			       (GEnv.SubsetEntr[V1] + GEnv.SubsetEntr[V2]));
 		ThisInfo = PrevInfo + (GEnv.MergeInfo[V1][V2] -
