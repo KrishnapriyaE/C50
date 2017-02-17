@@ -52,7 +52,7 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 {
     DiscrValue	v;
     double	ThisInfo=0.0;
-	double q=0.25;
+	double q=-1.5;
 double r=1/(1-q);
 
     /*  Check whether all values are unknown or the same  */
@@ -92,7 +92,7 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     DiscrValue	v;
     double	Sum=0.0, TotalCases=0;
     CaseCount	N;
-	double q=0.25;
+	double q=-1.5;
 	double r=1/(1-q);
     ForEach(v, MinVal, MaxVal)
     {
