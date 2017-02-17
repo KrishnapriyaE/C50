@@ -33,11 +33,12 @@
 
 #include "defns.h"
 #include "extern.h"
-
+#include "math.h"
 #include "transform.h"
 #include "redefine.h"
-
-#define	PartInfo(n) (-(n)*Log((n)/GEnv.Cases))
+#define q 0.25
+#define r 1/(1-q)
+#define	PartInfo(n) r*((pow(n,q)/GEnv.Cases)-1)
 
 
 /*************************************************************************/
@@ -162,7 +163,7 @@ void EvalContinuousAtt(Attribute Att, CaseNo Fp, CaseNo Lp)
 	}
     }
 
-    BestGain = (1 - GEnv.UnknownRate) *
+    BestGain = pow((1 - GEnv.UnknownRate),q) *
 	       (GEnv.BaseInfo - (GEnv.NAInfo + LeastInfo) / GEnv.KnownCases);
 
     /*  The threshold cost is the lesser of the cost of indicating the
@@ -282,7 +283,7 @@ void EstimateMaxGR(Attribute Att, CaseNo Fp, CaseNo Lp)
 			    + PartInfo(GEnv.LowCases)
 			    + PartInfo(GEnv.ApplicCases - GEnv.LowCases)) / GEnv.Cases;
 
-		ThisGain = (1 - GEnv.UnknownRate) *
+		ThisGain = pow((1 - GEnv.UnknownRate),q) *
 			   (GEnv.BaseInfo - (GEnv.NAInfo + LHInfo) / GEnv.KnownCases);
 		if ( ThisGain > Gain[Att] ) Gain[Att] = ThisGain;
 
