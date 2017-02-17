@@ -37,7 +37,7 @@
 
 #include "transform.h"
 #include "redefine.h"
-
+#include "math.h"
 /*************************************************************************/
 /*									 */
 /*	Given Freq[][] and ValFreq[], compute the information gain.	 */
@@ -87,16 +87,19 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     DiscrValue	v;
     double	Sum=0.0, TotalCases=0;
     CaseCount	N;
-
+	double q=0.25;
+	double r=1/(1-q);
     ForEach(v, MinVal, MaxVal)
     {
 	N = V[v];
 
-	Sum += N * Log(N);
+	//Sum += N * Log(N);
+	    Sum = Sum+pow(N,q)-1;
 	TotalCases += N;
     }
+	Sum=Sum*r;
 
-    return TotalCases * Log(TotalCases) - Sum;
+    return (pow(TotalCases,q) * r*pow(TotalCases,q) - Sum);
 }
 
 
