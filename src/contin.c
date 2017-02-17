@@ -36,7 +36,7 @@
 #include "math.h"
 #include "transform.h"
 #include "redefine.h"
-#define q -1.5
+#define q 4.5
 #define r 1/(1-q)
 #define	PartInfo(n) r*((pow(n,q)/GEnv.Cases)-1)
 
