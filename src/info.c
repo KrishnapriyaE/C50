@@ -44,6 +44,8 @@
 /*									 */
 /*************************************************************************/
 
+double q=0.25;
+double r=1/(1-q);
 
 double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 		   CaseCount TotalCases)
@@ -63,7 +65,9 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
     {
 	ThisInfo += TotalInfo(GEnv.Freq[v], 1, MaxClass);
     }
+	
     ThisInfo /= TotalCases;
+	ThisInfo=pow(ThisInfo,q)*ThisInfo;
 
     /*  Set the gain in information for all cases, adjusted for unknowns  */
 
@@ -99,7 +103,7 @@ double TotalInfo(double V[], DiscrValue MinVal, DiscrValue MaxVal)
     }
 	Sum=Sum*r;
 
-    return (pow(TotalCases,q) * r*pow(TotalCases,q) - Sum);
+    return  r*pow(TotalCases,q) - Sum);
 }
 
 
