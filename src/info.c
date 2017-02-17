@@ -44,8 +44,7 @@
 /*									 */
 /*************************************************************************/
 
-double q=0.25;
-double r=1/(1-q);
+
 
 double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 		   CaseCount TotalCases)
@@ -53,6 +52,8 @@ double ComputeGain(double BaseInfo, float UnknFrac, DiscrValue MaxVal,
 {
     DiscrValue	v;
     double	ThisInfo=0.0;
+	double q=0.25;
+double r=1/(1-q);
 
     /*  Check whether all values are unknown or the same  */
 
