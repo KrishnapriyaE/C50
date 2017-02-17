@@ -45,8 +45,7 @@
 /*									 */
 /*************************************************************************/
 
-const double q=0.25;
-const double r=1/(1-q);
+
 
 void InitialiseBellNumbers()
 /*   ---------------------  */
@@ -88,6 +87,8 @@ void EvalSubset(Attribute Att, CaseCount Cases)
     int		MissingValues=0;
     CaseCount	KnownCases;
     Boolean	Better;
+	double q=0.25;
+double r=1/(1-q);
 
     /*  First compute Freq[][], ValFreq[], base info, and the gain
 	and total info of a split on discrete attribute Att  */
@@ -369,7 +370,8 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
     double	Entr=0;
     CaseCount	KnownCases=0;
     int		R, C;
-
+double q=0.25;
+double r=1/(1-q);
     AddBlock(x, y);
 
     ForEach(c, 1, MaxClass)
@@ -430,6 +432,8 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     ClassNo	c;
     double	Entr=0;
     CaseCount	KnownCases=0, F;
+	double q=0.25;
+double r=1/(1-q);
 
     if ( y < x )
     {
