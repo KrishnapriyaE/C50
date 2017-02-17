@@ -37,7 +37,7 @@
 
 #include "transform.h"
 #include "redefine.h"
-
+#include "math.h"
 
 /*************************************************************************/
 /*									 */
@@ -45,6 +45,8 @@
 /*									 */
 /*************************************************************************/
 
+double q=0.25;
+double r=1/(1-q);
 
 void InitialiseBellNumbers()
 /*   ---------------------  */
@@ -238,7 +240,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 
     ForEach(V1, 1, GEnv.Blocks)
     {
-	GEnv.SubsetInfo[V1] = -GEnv.ValFreq[V1] * Log(GEnv.ValFreq[V1] / Cases);
+	GEnv.SubsetInfo[V1] = r*((pow(GEnv.ValFreq[V1],q)  / Cases)-1);
 	GEnv.SubsetEntr[V1] = TotalInfo(GEnv.Freq[V1], 1, MaxClass);
     }
 
@@ -273,7 +275,7 @@ void EvalSubset(Attribute Att, CaseCount Cases)
 		}
 
 		ThisGain = PrevGain -
-			   ((1-UnknownRate) / KnownCases) *
+			   (pow((1-UnknownRate) / KnownCases),q) *
 			     (GEnv.MergeEntr[V1][V2] -
 			       (GEnv.SubsetEntr[V1] + GEnv.SubsetEntr[V2]));
 		ThisInfo = PrevInfo + (GEnv.MergeInfo[V1][V2] -
@@ -372,12 +374,12 @@ void Merge(DiscrValue x, DiscrValue y, CaseCount Cases)
 
     ForEach(c, 1, MaxClass)
     {
-	Entr -= GEnv.Freq[x][c] * Log(GEnv.Freq[x][c]);
+	Entr += pow(GEnv.Freq[x][c],q)-1;
 	KnownCases += GEnv.Freq[x][c];
     }
-
-    GEnv.SubsetInfo[x] = - GEnv.ValFreq[x] * Log(GEnv.ValFreq[x] / Cases);
-    GEnv.SubsetEntr[x] = Entr + KnownCases * Log(KnownCases);
+Entr=r*Entr;
+    GEnv.SubsetInfo[x] = r*((pow(GEnv.ValFreq[x],q)/ Cases)-1);
+    GEnv.SubsetEntr[x] = Entr +(r*(pow(KnownCases,q)-1));
 
     /*  Eliminate y from working blocks  */
 
@@ -437,15 +439,16 @@ void EvaluatePair(DiscrValue x, DiscrValue y, CaseCount Cases)
     }
 
     F = GEnv.ValFreq[x] + GEnv.ValFreq[y];
-    GEnv.MergeInfo[x][y] = - F * Log(F / Cases);
+    GEnv.MergeInfo[x][y] =  r*((pow(F,q) / Cases)-1);
 
     ForEach(c, 1, MaxClass)
     {
 	F = GEnv.Freq[x][c] + GEnv.Freq[y][c];
-	Entr -= F * Log(F);
+	Entr += pow(F,q)-1;
 	KnownCases += F;
     }
-    GEnv.MergeEntr[x][y] = Entr + KnownCases * Log(KnownCases);
+	Entr=Entr*r;
+    GEnv.MergeEntr[x][y] = Entr + (r*pow(KnownCases,q)-1);
 }
 
 
