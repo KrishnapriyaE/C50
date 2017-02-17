@@ -274,11 +274,11 @@ double r=1/(1-q);
 		{
 		    continue;
 		}
-double s=(1-UnknownRate) / KnownCases);
+double s=(1-UnknownRate) / KnownCases;
 		ThisGain = PrevGain -
 			   (pow(s,q) *
 			     (GEnv.MergeEntr[V1][V2] -
-			       (GEnv.SubsetEntr[V1] + GEnv.SubsetEntr[V2]));
+			       (GEnv.SubsetEntr[V1] + GEnv.SubsetEntr[V2])));
 		ThisInfo = PrevInfo + (GEnv.MergeInfo[V1][V2] -
 			   (GEnv.SubsetInfo[V1] + GEnv.SubsetInfo[V2])) / Cases;
 		Verbosity(3,
