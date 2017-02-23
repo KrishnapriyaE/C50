@@ -284,7 +284,7 @@ void EstimateMaxGR(Attribute Att, CaseNo Fp, CaseNo Lp)
 			    + PartInfo(GEnv.LowCases)
 			    + PartInfo(GEnv.ApplicCases - GEnv.LowCases)) / GEnv.Cases;
 
-		ThisGain = pow((1 - GEnv.UnknownRate),q) *
+		ThisGain = r*(1-pow( GEnv.UnknownRate,alpha) )*
 			   (GEnv.BaseInfo - (GEnv.NAInfo + LHInfo) / GEnv.KnownCases);
 		if ( ThisGain > Gain[Att] ) Gain[Att] = ThisGain;
 
