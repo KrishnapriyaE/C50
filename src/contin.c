@@ -164,7 +164,7 @@ void EvalContinuousAtt(Attribute Att, CaseNo Fp, CaseNo Lp)
 	}
     }
 
-    BestGain = pow((1 - GEnv.UnknownRate),q) *
+    BestGain = (r*(1-pow(GEnv.UnknownRate,alpha))) *
 	       (GEnv.BaseInfo - (GEnv.NAInfo + LeastInfo) / GEnv.KnownCases);
 
     /*  The threshold cost is the lesser of the cost of indicating the
